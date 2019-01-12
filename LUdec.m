@@ -1,11 +1,16 @@
-% A funcao LUdec Contador para o numero de operacos gostaria de testar
+%%%%%%%%% DECOMPOSICAO LU %%%%%%%%
+% Autor: Lucas Abdalah
+% A = LU e a equacao de referencia para decomposicao
+% A funcao LUdec(A) recebe a matriz A quadrada e utiliza a eliminacao de Gauss para obter a L e U
+% A Matriz L guarda 
+% A Matriz U guarda o produtos colunas ortogonais e normalizadas
 
-function [L, U, flop] =  LUdec(Original)
+function [L, U] =  LUdec(A)
 
-flop=0;
+flop=0; % Conta as operacoes
 
 %% MATRIZ DE INTERESSE
-U = Original;
+U = A;
 
 [m,n] = size(U);
 
@@ -74,7 +79,7 @@ if m == n
         
     end
 
-    if L*U ~= Original
+    if L*U ~= A
         
         % Contador para o numero de operacos
         flop = flop + m^2;                    
