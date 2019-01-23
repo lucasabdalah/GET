@@ -1,12 +1,12 @@
 %%%% ALS Script SEM RUIDO %%%%
 clear; close all; clc;
-% Dimensıes do tensor 
+% Dimens√µes do tensor 
 I = 8; J = 9; K = 10;
 
 % Rank do tensor 
 R = 2;
 
-% % InicializaÁ„o das matrizes fatores 
+% % Inicializa√ß√£o das matrizes fatores 
 A = randn(I, R);
 B = randn(J, R); 
 C = randn(K, R);
