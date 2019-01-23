@@ -1,12 +1,12 @@
 %%%% ALS Script COM RUIDO %%%%
 clear; close all; clc;
-% Dimensıes do tensor 
+% Dimens√µes do tensor 
 I = 4; J = 4; K = 4;
 
 % Rank do tensor 
 R = 2;
 
-% % InicializaÁ„o das matrizes fatores 
+% % Inicializa√ß√£o das matrizes fatores 
 A = randn(I, R);
 B = randn(J, R); 
 C = randn(K, R);
@@ -21,7 +21,7 @@ SNR_lin=10^(SNR_db/10)
 sigma=((frob(X)^2)/((frob(N)^2))*SNR_lin)
 
 Y=X+(1/sqrt(sigma))*N;
-% RuÌdo 
+% Ru√≠do 
 
 itmax=1e3; 
 eps=1e-10;
