@@ -3,8 +3,8 @@
 % Last Update: 14 jan 2019 
 % Verifica se a entrada e matriz
 
-function [aux] =  verificacao(U)
-    [m,n]=size(U); % Dimensoes da entrada
+function [aux] =  verificacao(X)
+    [m,n]=size(X); % Dimensoes da entrada
     
     %%%%%%%%% Bloco de Verificao  %%%%%%%%%
     if m==n
