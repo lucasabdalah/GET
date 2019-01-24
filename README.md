@@ -53,7 +53,9 @@ O algoritmo inicia com a geração das matrizes fatores originais <a href="https
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{X}_{(3)}&space;\approx&space;\mathbf{C}(\mathbf{B}\odot&space;\mathbf{A})^T" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{X}_{(3)}&space;\approx&space;\mathbf{C}(\mathbf{B}\odot&space;\mathbf{A})^T" title="\mathbf{X}_{(3)} \approx \mathbf{C}(\mathbf{B}\odot \mathbf{A})^T" /></a>
 
-Dependendo do modo utilizado, é utilizada uma função de fold (desmatriciação)
+Dependendo do modo (1, 2 ou 3) utilizado, uma função de *folding* (desmatriciação) é aplicada para reorganizar o tensor <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{X}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{X}" title="\mathbf{X}" /></a>
+No caso do modo 1
+
 
 O resultado é um problema de valor mínimo global. 
 
