@@ -54,24 +54,32 @@ O algoritmo inicia com a geração das matrizes fatores originais <a href="https
 <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{X}_{(3)}&space;\approx&space;\mathbf{C}(\mathbf{B}\odot&space;\mathbf{A})^T" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{X}_{(3)}&space;\approx&space;\mathbf{C}(\mathbf{B}\odot&space;\mathbf{A})^T" title="\mathbf{X}_{(3)} \approx \mathbf{C}(\mathbf{B}\odot \mathbf{A})^T" /></a>
 
 Dependendo do modo (1, 2 ou 3) utilizado, uma função de *folding* (desmatriciação) é aplicada para reorganizar o tensor <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{X}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{X}" title="\mathbf{X}" /></a>
-No caso do modo 1
 
+No caso do modo 1, basta reorganizar a matriz de acordo com as dimensões <a href="https://www.codecogs.com/eqnedit.php?latex=I" target="_blank"><img src="https://latex.codecogs.com/gif.latex?I" title="I" /></a>, <a href="https://www.codecogs.com/eqnedit.php?latex=J" target="_blank"><img src="https://latex.codecogs.com/gif.latex?J" title="J" /></a> e <a href="https://www.codecogs.com/eqnedit.php?latex=K" target="_blank"><img src="https://latex.codecogs.com/gif.latex?K" title="K" /></a>, conhecidas.
 
-O resultado é um problema de valor mínimo global. 
+<a href="https://www.codecogs.com/eqnedit.php?latex=\texttt{X=reshape(X1,[I,J,K]);}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\texttt{X=reshape(X1,[I,J,K]);}" title="\texttt{X=reshape(X1,[I,J,K]);}" /></a>
+
+O resultado é um problema de valor mínimo global: 
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\underset{\hat{\boldsymbol{\mathbf{X}}}}{min}\left&space;\|&space;\boldsymbol{\mathbf{X}}&space;-&space;\hat{\boldsymbol{\mathbf{X}}}&space;\right&space;\|" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\underset{\hat{\boldsymbol{\mathbf{X}}}}{min}\left&space;\|&space;\boldsymbol{\mathbf{X}}&space;-&space;\hat{\boldsymbol{\mathbf{X}}}&space;\right&space;\|" title="\underset{\hat{\boldsymbol{\mathbf{X}}}}{min}\left \| \boldsymbol{\mathbf{X}} - \hat{\boldsymbol{\mathbf{X}}} \right \|" /></a>
 
-Onde a estimativa é dada por:
+E essa minimazação é dada pelo o algoritmo que fixa, por exemplo *B* e *C* para obter *A*, de acordo com manipulação das equações utilizadas para obter os modos 1, 2 e 3 do tensor. Em seguida, fixa-se *A* e *C* para obter *B*. Por último, fixa-se *A* and *B* para obter *C*. Isso segue repetindo até que o critério de parada ou convergência seja satisfeito. 
 
-<a href="https://www.codecogs.com/eqnedit.php?latex={\hat{\boldsymbol{\mathbf{X}}}}&space;=&space;\sum_{r=1}^{R}&space;\lambda_r&space;\&space;\boldsymbol{\mathbf{a}}_r&space;\circ&space;\boldsymbol{\mathbf{b}}_r&space;\circ&space;\boldsymbol{\mathbf{c}}_r" target="_blank"><img src="https://latex.codecogs.com/gif.latex?{\hat{\boldsymbol{\mathbf{X}}}}&space;=&space;\sum_{r=1}^{R}&space;\lambda_r&space;\&space;\boldsymbol{\mathbf{a}}_r&space;\circ&space;\boldsymbol{\mathbf{b}}_r&space;\circ&space;\boldsymbol{\mathbf{c}}_r" title="{\hat{\boldsymbol{\mathbf{X}}}} = \sum_{r=1}^{R} \lambda_r \ \boldsymbol{\mathbf{a}}_r \circ \boldsymbol{\mathbf{b}}_r \circ \boldsymbol{\mathbf{c}}_r" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{\hat{A}}&space;=&space;\mathbf{X}_{(1)}&space;[(\mathbf{C}\odot&space;\mathbf{B})^T]^\dagger" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{\hat{A}}&space;=&space;\mathbf{X}_{(1)}&space;[(\mathbf{C}\odot&space;\mathbf{B})^T]^\dagger" title="\mathbf{\hat{A}} = \mathbf{X}_{(1)} [(\mathbf{C}\odot \mathbf{B})^T]^\dagger" /></a>
 
-Por fim, o algoritmo fixa, por exemplo *B* e *C* para obter *A*, em seguida fixa *A* e *C* para obter *B*, por fim fixa *A* and *B* para obter *C*, e segue repetindo o procedimento até que o critério de parada ou convergência seja satisfeito. 
-Observe que ao fixar tudo, exceto uma matriz, o problema é reduzido a um problema de Mínimos Quadrados Linear. 
+<a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{\hat{B}}&space;=&space;\mathbf{X}_{(2)}&space;[(\mathbf{C}\odot&space;\mathbf{A})^T]^\dagger" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{\hat{B}}&space;=&space;\mathbf{X}_{(2)}&space;[(\mathbf{C}\odot&space;\mathbf{A})^T]^\dagger" title="\mathbf{\hat{B}} = \mathbf{X}_{(2)} [(\mathbf{C}\odot \mathbf{A})^T]^\dagger" /></a>
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{\hat{C}}&space;=&space;\mathbf{X}_{(3)}&space;[(\mathbf{B}\odot&space;\mathbf{A})^T]^\dagger" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{\hat{C}}&space;=&space;\mathbf{X}_{(3)}&space;[(\mathbf{B}\odot&space;\mathbf{A})^T]^\dagger" title="\mathbf{\hat{C}} = \mathbf{X}_{(3)} [(\mathbf{B}\odot \mathbf{A})^T]^\dagger" /></a>
 
-Para ilustrar, supondo que *B* e *C* são fixado, logo o problema de minimização pode ser reescrito em forma matricial tal que:
+Observe que ao fixar tudo, exceto uma matriz, o problema é reduzido a um problema de Erro de Mínimos Quadrados (MSE), em forma matricial, que é resolvido através da norma de Frobenius:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=\left&space;\|&space;\mathbf{X}_{(1)}&space;-&space;\hat{\mathbf{A}}(\mathbf{C}\odot&space;\mathbf{B})\right&space;\|_F" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left&space;\|&space;\mathbf{X}_{(1)}&space;-&space;\hat{\mathbf{A}}(\mathbf{C}\odot&space;\mathbf{B})\right&space;\|_F" title="\left \| \mathbf{X}_{(1)} - \hat{\mathbf{A}}(\mathbf{C}\odot \mathbf{B})\right \|_F" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=\left&space;\|&space;\mathbf{X}_{(1)}&space;-&space;\hat{\mathbf{A}}(\mathbf{\hat{C}}\odot&space;\mathbf{\hat{B}})\right&space;\|_F" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left&space;\|&space;\mathbf{X}_{(1)}&space;-&space;\hat{\mathbf{A}}(\mathbf{\hat{C}}\odot&space;\mathbf{\hat{B}})\right&space;\|_F" title="\left \| \mathbf{X}_{(1)} - \hat{\mathbf{A}}(\mathbf{\hat{C}}\odot \mathbf{\hat{B}})\right \|_F" /></a>
+
+Podendo ser utilizado no formato normalizado NMSE:
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\frac{\left&space;\|&space;\boldsymbol{\mathbf{X}}&space;-&space;\hat{\boldsymbol{\mathbf{X}}}&space;\right&space;\|_{F}^2}{\left&space;\|&space;\boldsymbol{\mathbf{X}}\right&space;\|_{F}^2}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{\left&space;\|&space;\boldsymbol{\mathbf{X}}&space;-&space;\hat{\boldsymbol{\mathbf{X}}}&space;\right&space;\|_{F}^2}{\left&space;\|&space;\boldsymbol{\mathbf{X}}\right&space;\|_{F}^2}" title="\frac{\left \| \boldsymbol{\mathbf{X}} - \hat{\boldsymbol{\mathbf{X}}} \right \|_{F}^2}{\left \| \boldsymbol{\mathbf{X}}\right \|_{F}^2}" /></a>
+
+% Monte Carlo
 
 ### 4ª Tarefa - Decomposição TUCKER
 % Em construção
