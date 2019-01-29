@@ -83,3 +83,5 @@ Podendo ser utilizado no formato normalizado NMSE:
 
 ### 4ª Tarefa - Decomposição TUCKER
 % Em construção
+
+<a class="reference internal image-reference" href="https://www.tensorlab.net/demos/mlsvd.html"> <img alt="MLSVD" src="https://www.tensorlab.net/demos/_images/mlsvd.svg"></a>
